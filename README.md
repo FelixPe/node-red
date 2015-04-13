@@ -5,7 +5,7 @@ http://nodered.org
 [![Build Status](https://travis-ci.org/node-red/node-red.svg?branch=master)](https://travis-ci.org/node-red/node-red)
 [![Coverage Status](https://coveralls.io/repos/node-red/node-red/badge.svg?branch=master)](https://coveralls.io/r/node-red/node-red?branch=master)
 
-A visual tool for wiring the Internet of Things.
+A visual tool for wiring the Internet of Things ready to use in any Cloud Foundry instance.
 
 ![Node-RED: A visual tool for wiring the Internet of Things](http://nodered.org/images/node-red-screenshot.png)
 
@@ -14,9 +14,10 @@ A visual tool for wiring the Internet of Things.
 Check out http://nodered.org/docs/getting-started/ for full instructions on getting
 started.
 
-1. `sudo npm install -g --unsafe-perm node-red`
-2. `node-red`
-3. Open <http://localhost:1880>
+1. download the zip and unzip, or git clone
+2. Push the app
+3. (optional) create and bind all mongodb or redis you want on your app
+4. Restage your app
 
 ## Getting Help
 
