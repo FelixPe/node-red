@@ -130,7 +130,7 @@ module.exports = {
         strategy: {
             name: "Keycloak",
             label: 'Sign in with Robot one',
-            icon:"fa-robot",
+            icon:"fa-circle",
             strategy: require("@exlinc/keycloak-passport"),
             options: {
                 host: KEYCLOAK_BASE_URL,

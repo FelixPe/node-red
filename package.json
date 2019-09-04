@@ -76,6 +76,7 @@
         "mqtt": "2.18.8",
         "multer": "1.4.1",
         "mustache": "3.0.1",
+        "node-red-contrib-chatbot": "^0.16.12",
         "node-red-dashboard": "^2.16.2",
         "node-red-node-email": "^1.6.2",
         "node-red-node-feedparser": "^0.1.14",
