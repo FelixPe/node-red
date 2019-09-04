@@ -130,7 +130,8 @@ module.exports = {
         strategy: {
             name: "Keycloak",
             label: 'Sign in with Robot one',
-            icon:"fa-circle",
+            icon:"fa-lock",
+            image: "",
             strategy: require("@exlinc/keycloak-passport"),
             options: {
                 host: KEYCLOAK_BASE_URL,
@@ -146,6 +147,16 @@ module.exports = {
             {
                 done(null, profile)
             }
+        },
+        authenticate: function() {
+            var user = arguments[0];
+            return new Promise(function(resolve, reject) {
+                if (user && user.username === process.env.KEYCLOAK_ADMIN_USER) {
+                    resolve(user);
+                } else {
+                    resolve(null);
+                }
+            });            
         },
         users: [
             { 

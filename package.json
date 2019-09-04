@@ -24,7 +24,7 @@
         }
     ],
     "dependencies": {
-        "@exlinc/keycloak-passport": "^1.0.2",
+        "@exlinc/keycloak-passport": "github:FelixPe/keycloak-passport",
         "ajv": "6.10.0",
         "basic-auth": "2.0.1",
         "bcryptjs": "2.4.3",
