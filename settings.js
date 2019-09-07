@@ -21,7 +21,7 @@
 const VCAP_APPLICATION = JSON.parse(process.env.VCAP_APPLICATION)
 const KEYCLOAK_BASE_URL = process.env.KEYCLOAK_BASE_URL
 const KEYCLOAK_REALM = process.env.KEYCLOAK_REALM || "RobotOne"
-
+let users = [] // users array is filled by logins via oauth2
  
 module.exports = {
     // the tcp port that the Node-RED web server is listening on
@@ -151,19 +151,25 @@ module.exports = {
         authenticate: function() {
             var user = arguments[0];
             return new Promise(function(resolve, reject) {
-                if (user && user.username === process.env.KEYCLOAK_ADMIN_USER) {
+                if (typeof user !== 'undefined' && typeof user.permissions !== 'undefined') {
+                    console.info("Authenticated " + user.username + " permissions: " + user.permissions);
+                    users[user.username] = user;
                     resolve(user);
                 } else {
                     resolve(null);
                 }
             });            
         },
-        users: [
-            { 
-                username: process.env.KEYCLOAK_ADMIN_USER,
-                permissions: ["*"]
-            }
-        ]
+        users: function(username){
+            return new Promise(function(resolve, reject) {
+                var user = users[username]
+                if(typeof user === 'undefined') {
+                    resolve(null)
+                } else {
+                    resolve(users[username])
+                }
+            });
+        }
     },
     // To password protect the node-defined HTTP endpoints (httpNodeRoot), or
     // the static content (httpStatic), the following properties can be used.
