@@ -7,7 +7,7 @@ http://nodered.org
 
 A visual tool for wiring the Internet of Things ready to use in any Cloud Foundry instance.
 
-![Node-RED: A visual tool for wiring the Internet of Things](http://nodered.org/images/node-red-screenshot.png)
+![Node-RED: Low-code programming for event-driven applications](http://nodered.org/images/node-red-screenshot.png)
 
 ## Quick Start
 
@@ -57,7 +57,7 @@ This project adheres to the [Contributor Covenant 1.4](http://contributor-covena
 
 ## Authors
 
-Node-RED is a project of the [JS Foundation](http://js.foundation).
+Node-RED is a project of the [OpenJS Foundation](https://openjsf.org).
 
 It was created by [IBM Emerging Technology](https://www.ibm.com/blogs/emerging-technology/).
 
@@ -68,4 +68,4 @@ It was created by [IBM Emerging Technology](https://www.ibm.com/blogs/emerging-t
 
 ## Copyright and license
 
-Copyright JS Foundation and other contributors, http://js.foundation under [the Apache 2.0 license](LICENSE).
+Copyright JS Foundation and other contributors, https://openjsf.org under [the Apache 2.0 license](LICENSE).
