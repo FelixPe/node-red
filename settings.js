@@ -20,6 +20,7 @@
 
 const VCAP_APPLICATION = JSON.parse(process.env.VCAP_APPLICATION)
 const KEYCLOAK_BASE_URL = process.env.KEYCLOAK_BASE_URL
+const VCAP_SERVICES = JSON.parse(process.env.VCAP_SERVICES)
 const KEYCLOAK_REALM = process.env.KEYCLOAK_REALM || "RobotOne"
 let users = [] // users array is filled by logins via oauth2
  
@@ -171,6 +172,15 @@ module.exports = {
             });
         }
     },
+
+
+    redis: {
+        "host": VCAP_SERVICES.p-redis[0].credentials.host || "localhost",
+        "auth_pass": VCAP_SERVICES.p-redis[0].credentials.password || null,
+        "port": VCAP_SERVICES.p-redis[0].credentials.port || 6379
+    },
+    storageModule: require("node-red-contrib-redis-storage"),
+
     // To password protect the node-defined HTTP endpoints (httpNodeRoot), or
     // the static content (httpStatic), the following properties can be used.
     // The pass field is a bcrypt hash of the password.
