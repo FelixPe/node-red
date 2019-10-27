@@ -23,10 +23,13 @@ const KEYCLOAK_BASE_URL = process.env.KEYCLOAK_BASE_URL
 const VCAP_SERVICES = JSON.parse(process.env.VCAP_SERVICES)
 const KEYCLOAK_REALM = process.env.KEYCLOAK_REALM || "RobotOne"
 let users = [] // users array is filled by logins via oauth2
- 
+
+var cfenv = require("cfenv");
+var appEnv = cfenv.getAppEnv();
+
 module.exports = {
     // the tcp port that the Node-RED web server is listening on
-    uiPort: process.env.PORT || 1880,
+    uiPort: appEnv.port || 1880,
 
     // By default, the Node-RED UI accepts connections on all IPv4 interfaces.
     // To listen on all IPv6 addresses, set uiHost to "::",
@@ -174,12 +177,28 @@ module.exports = {
     },
 
 
+        
+
     redis: {
-        "host": VCAP_SERVICES.p-redis[0].credentials.host || "localhost",
-        "auth_pass": VCAP_SERVICES.p-redis[0].credentials.password || null,
-        "port": VCAP_SERVICES.p-redis[0].credentials.port || 6379
+        "host": String(appEnv.getService("noderedis").credentials.host),
+        "auth_pass": String(appEnv.getService("noderedis").credentials.password),
+        "port": parseInt(appEnv.getService("noderedis").credentials.port),
+        "db": 0
     },
     storageModule: require("node-red-contrib-redis-storage"),
+
+    contextStorage: {
+        redis: {
+            module: require("node-red-context-redis"),
+            config: {
+                "host": String(appEnv.getService("noderedis").credentials.host),
+                "password": String(appEnv.getService("noderedis").credentials.password),
+                "port": parseInt(appEnv.getService("noderedis").credentials.port),
+                "db": 1
+            }
+        }
+    },
+
 
     // To password protect the node-defined HTTP endpoints (httpNodeRoot), or
     // the static content (httpStatic), the following properties can be used.
