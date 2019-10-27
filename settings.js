@@ -176,9 +176,6 @@ module.exports = {
         }
     },
 
-
-        
-
     redis: {
         "host": String(appEnv.getService("noderedis").credentials.host),
         "auth_pass": String(appEnv.getService("noderedis").credentials.password),
@@ -187,17 +184,7 @@ module.exports = {
     },
     storageModule: require("node-red-contrib-redis-storage"),
 
-    contextStorage: {
-        redis: {
-            module: require("node-red-context-redis"),
-            config: {
-                "host": String(appEnv.getService("noderedis").credentials.host),
-                "password": String(appEnv.getService("noderedis").credentials.password),
-                "port": parseInt(appEnv.getService("noderedis").credentials.port),
-                "db": 1
-            }
-        }
-    },
+
 
 
     // To password protect the node-defined HTTP endpoints (httpNodeRoot), or
@@ -220,7 +207,7 @@ module.exports = {
 
     // The following property can be used to cause insecure HTTP connections to
     // be redirected to HTTPS.
-    //requireHttps: true,
+    requireHttps: true,
 
     // The following property can be used to disable the editor. The admin API
     // is not affected by this option. To disable both the editor and the admin
@@ -304,11 +291,17 @@ module.exports = {
     // provided here will enable file-based context that flushes to disk every 30 seconds.
     // Refer to the documentation for further options: https://nodered.org/docs/api/context/
     //
-    //contextStorage: {
-    //    default: {
-    //        module:"localfilesystem"
-    //    },
-    //},
+    contextStorage: {
+        redis: {
+            module: require("node-red-context-redis"),
+            config: {
+                "host": String(appEnv.getService("noderedis").credentials.host),
+                "password": String(appEnv.getService("noderedis").credentials.password),
+                "port": parseInt(appEnv.getService("noderedis").credentials.port),
+                "db": 1
+            }
+        }
+    },
 
     // The following property can be used to order the categories in the editor
     // palette. If a node's category is not in the list, the category will get
@@ -338,6 +331,11 @@ module.exports = {
 
     // Customising the editor
     editorTheme: {
+        header: {
+            title: "SeRoNet Node-RED",
+            image: "https://www.dev.robot.one/build/images/logo-color-light.14ad6b8e.svg", // or null to remove image
+            url: "http://node-red.sero.network" // optional url to make the header text/image a link to this url
+        },
         projects: {
             // To enable the Projects feature, set this value to true
             enabled: true
